@@ -1,0 +1,55 @@
+databaseChangeLog:
+  - changeSet:
+      id: 1
+      author: bohdan.loiko
+      changes:
+        - createTable:
+            tableName: currency
+            columns:
+              - column:
+                  name: code
+                  type: varchar(255)
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(255)
+
+  - changeSet:
+      id: 2
+      author: bohdan.loiko
+      changes:
+        - createTable:
+            tableName: exchange_rates
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+              - column:
+                  name: last_updated
+                  type: timestamp
+              - column:
+                  name: rate
+                  type: numeric(38,2)
+              - column:
+                  name: base_currency_code
+                  type: varchar(255)
+              - column:
+                  name: target_currency_code
+                  type: varchar(255)
+        - addForeignKeyConstraint:
+            baseTableName: exchange_rates
+            baseColumnNames: base_currency_code
+            referencedTableName: currency
+            referencedColumnNames: code
+            constraintName: fk_base_currency
+        - addForeignKeyConstraint:
+            baseTableName: exchange_rates
+            baseColumnNames: target_currency_code
+            referencedTableName: currency
+            referencedColumnNames: code
+            constraintName: fk_target_currency
