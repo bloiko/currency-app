@@ -1,0 +1,178 @@
+{
+	"info": {
+		"_postman_id": "9368a6db-1d5e-403c-a088-4d8e5a2f6be8",
+		"name": "Currency Exchange API",
+		"description": "Collection for testing Currency Exchange Rate API endpoints",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "14244949"
+	},
+	"item": [
+		{
+			"name": "Currencies",
+			"item": [
+				{
+					"name": "Get All Currencies",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/v1/currencies",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"currencies"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success Response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": ""
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "Get Exchange Rates",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/v1/currencies/GBP/rates",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"currencies",
+								"GBP",
+								"rates"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success Response",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": ""
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Currency Not Found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": ""
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "Add New Currency",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"code\": \"GBP2\",\n    \"name\": \"British Pound\"\n}"
+						},
+						"url": {
+							"raw": "{{baseUrl}}/v1/currencies",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"v1",
+								"currencies"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Success Response",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"code\": \"GBP\",\n    \"name\": \"British Pound\"\n}"
+								},
+								"url": {
+									"raw": ""
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Currency Already Exists",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"code\": \"USD\",\n    \"name\": \"US Dollar\"\n}"
+								},
+								"url": {
+									"raw": ""
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:8080/api"
+		}
+	]
+}
